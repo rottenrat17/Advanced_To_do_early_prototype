@@ -42,6 +42,7 @@ struct HomeView: View {
                         )
                         .contentShape(Rectangle())
                         .onTapGesture { selectedTask = task }
+                        .listRowBackground(rowBackground(for: task))
                     }
                     .onDelete(perform: deleteTasks)
                 }
@@ -66,6 +67,12 @@ struct HomeView: View {
                 TaskDetailView(task: task)
             }
         }
+    }
+
+    private func rowBackground(for task: TaskItem) -> Color {
+        if task.isOverdue { return Color.red.opacity(0.15) }
+        if task.isDueSoon { return Color.orange.opacity(0.15) }
+        return Color.clear
     }
 
     private func deleteTasks(at offsets: IndexSet) {
