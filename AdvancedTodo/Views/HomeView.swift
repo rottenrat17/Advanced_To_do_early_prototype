@@ -10,6 +10,7 @@ enum TaskFilter: String, CaseIterable {
 struct HomeView: View {
     @EnvironmentObject var appState: AppState
     @State private var selectedFilter: TaskFilter = .all
+    @State private var showingAddTask = false
     @State private var showingTaskTypes = false
     @State private var selectedTask: TaskItem?
 
@@ -59,6 +60,17 @@ struct HomeView: View {
                     }
                     .accessibilityLabel("Open Task Type Manager")
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showingAddTask = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                    }
+                    .accessibilityLabel("Add new task")
+                }
+            }
+            .sheet(isPresented: $showingAddTask) {
+                AddEditTaskView(mode: .add)
             }
             .sheet(isPresented: $showingTaskTypes) {
                 TaskTypeManagerView()
