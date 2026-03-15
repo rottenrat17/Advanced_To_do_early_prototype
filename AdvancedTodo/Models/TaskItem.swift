@@ -28,5 +28,13 @@ struct TaskItem: Identifiable, Codable, Hashable {
         self.createdAt = createdAt
     }
 
-    
+    /// Past its due date and not completed.
+    var isOverdue: Bool {
+        !isCompleted && dueDate < Date()
+    }
+
+    /// Due within the next 24 hours.
+    var isDueSoon: Bool {
+        !isCompleted && !isOverdue && dueDate.timeIntervalSinceNow < 24 * 3600
+    }
 }
