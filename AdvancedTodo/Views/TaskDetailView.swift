@@ -6,6 +6,7 @@ struct TaskDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     let task: TaskItem
+    @State private var showEdit = false
     @State private var showDeleteAlert = false
 
     /// Always from AppState so the screen updates when we mark complete.
@@ -53,6 +54,12 @@ struct TaskDetailView: View {
                     }
                     .accessibilityLabel("Mark as Completed")
                 }
+                Button {
+                    showEdit = true
+                } label: {
+                    Label("Edit Task", systemImage: "pencil")
+                }
+                .accessibilityLabel("Edit Task")
                 Button(role: .destructive) {
                     showDeleteAlert = true
                 } label: {
@@ -63,6 +70,9 @@ struct TaskDetailView: View {
         }
         .navigationTitle("Task Details")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showEdit) {
+            AddEditTaskView(mode: .edit(currentTask))
+        }
         .alert("Delete Task?", isPresented: $showDeleteAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Delete", role: .destructive) {
