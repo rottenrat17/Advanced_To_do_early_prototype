@@ -1,0 +1,20 @@
+# XcodeGen spec - run from repo root: xcodegen generate (optional; .xcodeproj already included)
+name: AdvancedTodo
+options:
+  bundleIdPrefix: com.g9
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+targets:
+  AdvancedTodo:
+    type: application
+    platform: iOS
+    sources:
+      - path: AdvancedTodo
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.g9.AdvancedTodo
+      TARGETED_DEVICE_FAMILY: "1,2"
+      INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+      INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
